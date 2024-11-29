@@ -137,4 +137,77 @@ world_cities.each do |city|
   City.create(city)
 end
 
+# US Airports - example cities
+us_airports = {
+  'New York' => [
+    { full_name: 'John F. Kennedy International Airport', iata_code: 'JFK' },
+    { full_name: 'LaGuardia Airport', iata_code: 'LGA' }
+  ],
+  'Los Angeles' => [
+    { full_name: 'Los Angeles International Airport', iata_code: 'LAX' }
+  ],
+  'Chicago' => [
+    { full_name: 'OHare International Airport', iata_code: 'ORD' }
+  ],
+  'Houston' => [
+    { full_name: 'George Bush Intercontinental Airport', iata_code: 'IAH' }
+  ],
+  'Phoenix' => [
+    { full_name: 'Phoenix Sky Harbor International Airport', iata_code: 'PHX' }
+  ],
+}
 
+# Create airports for US cities
+us_airports.each do |city_name, airports|
+  city = City.find_by(name: city_name)
+  airports.each do |airport|
+    Airport.create!(full_name: airport[:full_name], iata_code: airport[:iata_code], city: city)
+  end
+end
+
+# World Airports - example cities
+world_airports = {
+  'Tokyo' => [
+    { full_name: 'Narita International Airport', iata_code: 'NRT' }
+  ],
+  'Delhi' => [
+    { full_name: 'Indira Gandhi International Airport', iata_code: 'DEL' }
+  ],
+  'Shanghai' => [
+    { full_name: 'Shanghai Pudong International Airport', iata_code: 'PVG' }
+  ],
+  'São Paulo' => [
+    { full_name: 'São Paulo/Guarulhos–Governador André Franco Montoro International Airport', iata_code: 'GRU' }
+  ],
+  'Mumbai' => [
+    { full_name: 'Chhatrapati Shivaji Maharaj International Airport', iata_code: 'BOM' }
+  ],
+  # Add more cities and airports as needed
+}
+
+# Create airports for world cities
+world_airports.each do |city_name, airports|
+  city = City.find_by(name: city_name)
+  airports.each do |airport|
+    Airport.create!(full_name: airport[:full_name], iata_code: airport[:iata_code], city: city)
+  end
+end
+
+# Aircrafts - Common commercial models
+aircrafts = [
+  { model: '737', make: 'Boeing' },
+  { model: '747', make: 'Boeing' },
+  { model: '787', make: 'Boeing' },
+  { model: 'A320', make: 'Airbus' },
+  { model: 'A350', make: 'Airbus' },
+  { model: '777', make: 'Boeing' },
+  { model: 'A330', make: 'Airbus' },
+  { model: '767', make: 'Boeing' },
+  { model: '757', make: 'Boeing' },
+  { model: 'A380', make: 'Airbus' }
+]
+
+# Create aircraft records
+aircrafts.each do |aircraft|
+  Aircraft.create!(model: aircraft[:model], make: aircraft[:make])
+end
