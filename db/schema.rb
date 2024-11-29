@@ -10,7 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_11_29_210754) do
+ActiveRecord::Schema[7.0].define(version: 2024_11_29_214233) do
+  create_table "airports", force: :cascade do |t|
+    t.string "iata_code", null: false
+    t.string "full_name", null: false
+    t.integer "city_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["city_id"], name: "index_airports_on_city_id"
+    t.index ["iata_code"], name: "index_airports_on_iata_code", unique: true
+    t.check_constraint "length(iata_code) = 3", name: "check_iata_code_length"
+  end
+
   create_table "cities", force: :cascade do |t|
     t.string "name", null: false
     t.string "state"
@@ -20,4 +31,5 @@ ActiveRecord::Schema[7.0].define(version: 2024_11_29_210754) do
     t.index ["name", "state", "country"], name: "index_cities_on_name_state_country", unique: true
   end
 
+  add_foreign_key "airports", "cities"
 end
